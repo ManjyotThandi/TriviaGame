@@ -107,6 +107,18 @@ function incorrectAnswer() {
 
 // When timer goes to zero
 function outOfTime() {
+    clearInterval(myTimer)
+    questionIndex = questionIndex + 1
+    displayQuestion()
+    displayAnswers()
+    $("#answers").empty()
+     $("#timeLeft").empty()
+     // allows for the gap between the three second correct or incorrect screen
+     counter = 33
+     displayQuestion()
+     displayAnswers()
+     // gets the timer going again
+     myTimer = setInterval(timer,1000)
     $("#screen").hide()
     var noTime = $("<h1>")
     noTime.attr("id", "times")
