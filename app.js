@@ -12,7 +12,10 @@ var incorrect = 0
 
 var questions = [
     {q: "Who are the Champs?", a: "Raptors", o: ["Raptors", "Warriors"]},
-    {q: "Who is the MVP?", a: "Giannis", o: ["Curry", "LeBron", "Giannis"]}
+    {q: "Who is the MVP?", a: "Giannis", o: ["Curry", "LeBron", "Giannis"]},
+    {q: "Finish the Name. Lebron", a: "James", o: ["Curry", "LeBron", "James"]},
+    {q: "Finish the Name. Kobe", a: "Bryant", o: ["Curry", "LeBron", "Bryant"]},
+    {q: "Finish the Name. Michael", a: "Jordan", o: ["Jordan", "LeBron", "Pietrus"]}
 ]
 
 
@@ -73,6 +76,7 @@ function startClick() {
         displayScore ()
         //timer()
         myTimer = setInterval(timer,1000)
+        $("#start").hide()
     }
 }
 
@@ -157,14 +161,31 @@ document.getElementById("answers").onclick = function(event) {
      $("#answers").empty()
      $("#timeLeft").empty()
      // allows for the gap between the three second correct or incorrect screen
+     if(questionIndex < questions.length){
      counter = 33
      displayQuestion()
      displayAnswers()
      // gets the timer going again
      myTimer = setInterval(timer,1000)
+     }
+     else {
+        $("#body").hide()
+        var noTime = $("<p>")
+        var notright = $("<p>")
+        noTime.attr("id", "final")
+        noTime.text("Number of correct answers : " + score)
+        notright.text("Number of Incorrect Answers : " + incorrect)
+        $("#bodyy").append(noTime)
+        $("#bodyy").append(notright)
+        var playagain = $("<button>")
+        playagain.attr("id","playagain")
+        playagain.text("Play again")
+        $("#bodyy").append(playagain)
+        document.getElementById("playagain").onclick = function() {
+            location.reload()
+
+           }
+        }
+
      
  }
- 
-
-
-
